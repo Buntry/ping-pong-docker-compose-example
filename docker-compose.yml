@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  pinger:
+    container_name: pinger
+    build:
+      context: ./pinger
+    ports:
+      - 3000:8000
+    environment: 
+      CHOKIDAR_USEPOLLING: 'true'
+      PYTHONBUFFERED: 1
+    volumes: 
+      - './pinger:/app/pinger'
+    depends_on: 
+      - ponger
+  ponger:
+    container_name: ponger
+    build:
+      context: ./ponger
+    ports:
+      - 3010:8000
+    environment: 
+      CHOKIDAR_USEPOLLING: 'true'
+      PYTHONBUFFERED: 1
+    volumes: 
+      - './ponger:/app/ponger'
+
